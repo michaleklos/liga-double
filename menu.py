@@ -1,13 +1,13 @@
 from players import add_player
 from matches import add_match
+from players import save_players_score
+
 
 def display_options():
     print('1) Add player')
     print('2) Add match')
-    print('3) Show score')
-    print('4) Show player\'s matches')
-
-
+    print('3) Quit')
+    
 def menu(data):
     display_options()
     option_no = int(input())
@@ -17,8 +17,6 @@ def menu(data):
     elif option_no == 2:
         add_match(data)
     elif option_no == 3:
-        pass
-    elif option_no == 4:
-        pass
+        quit()
     else:
         print('option not found')

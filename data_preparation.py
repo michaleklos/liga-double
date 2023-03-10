@@ -12,6 +12,12 @@ class Data:
     def print_matches(self):
         for match in self.matches:
             print(match)
+    def find_player(self,name):
+        for player in self.players:
+            if name==player.name:
+                return player
+        raise RuntimeError("literowka")        
+
     
 class Team:
     def __init__(self, player1, player2):
@@ -26,15 +32,15 @@ def load_players(data):
         lines = players_file.readlines()
     for line in lines:
         name, points = line.split(' ')
-        data.players.append(Player(name, int(points)))
+        data.players.append(Player(name, float(points)))
 
 
 def load_matches(data):
     with open('data/matches.txt', "r") as matches_file:
         lines = matches_file.readlines()
     for line in lines:
-        blue_player1, blue_player2, white_player1, white_player2, result = line.split(' ')
-        data.matches.append(Match(Team(blue_player1,blue_player2), Team(white_player1, white_player2), int(result)))
+        win_player1, win_player2, loose_player1, loose_player2, result = line.split(' ')
+        data.matches.append(Match(Team(win_player1,win_player2), Team(loose_player1, loose_player2), int(result)))
 
 
 def load_data():
@@ -42,5 +48,5 @@ def load_data():
     load_players(data)
     data.print_players()
     load_matches(data)
-    data.print_matches()
+    
     return data
